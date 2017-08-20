@@ -29,7 +29,8 @@ class SubStatus(object):
             text = colored.green(text)
         elif "Wrong" in text:
             text = colored.red(text)
-        
+        elif "Compilation" in text:
+            text = colored.yellow(text)
         return text
         
     def print_table(self):

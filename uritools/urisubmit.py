@@ -28,14 +28,15 @@ def uri(s, r, driver):
     user, password = settings.get_settings()
     print(user)
     print(password)
+    print(s)
     if r:
         status(user, password, driver)
     elif s:
-        submit_problem(user,password, s)
+        submit_problem(user,password, s, driver)
 
         
 def submit_problem(user, password, problem, driver):
-    driver = create_driver()
+    driver = create_driver(driver)
     l = LoginPage(driver, user, password)
     if l.login():
         sub = SubPage(driver, problem)

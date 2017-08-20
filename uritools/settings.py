@@ -19,6 +19,9 @@ class Settings(object):
         file_settings = os.path.join(os.getcwd(),".uri.settings")
         if os.path.isfile(file_settings):
             return file_settings
+        file_settings = os.path.join(os.getcwd(),"..", ".uri.settings")
+        if os.path.isfile(file_settings):
+            return file_settings
         else:
             print("Você precisa adicionar um arquivo de configuracoes")
             return None

@@ -38,7 +38,14 @@ class SubPage(BasePage):
         return text
 
     def get_file_path(self):
-       return os.path.join(os.getcwd(), self.problem+".cpp") 
+        files = os.listdir(os.getcwd())
+        files = [ x for x in files if x.startswith(str(self.problem))]
+        #r = re.compile("^" + str(self.problem))
+        #files = filter(r.match, files)
+        print(files)
+        print(type(files))
+        if len(files) == 1:
+            return os.path.join(os.getcwd(),files[0] ) 
    
     def submit(self):
         self.driver.get(self.url)
