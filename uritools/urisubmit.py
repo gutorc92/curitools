@@ -21,7 +21,8 @@ from pages import LoginPage, SubPage
 @click.command()
 @click.option('-s', default=1, help='Submeter um problema')
 @click.option('-r', is_flag=True, help='Imprimir tabela de submissoes')
-def uri(s, r):
+@click.option('--driver', default="phantom",type=click.Choice(['phantom', 'chrome']) , help='driver to use')
+def uri(s, r, driver):
     """Simple program that greets NAME for a total of COUNT times."""
     
     settings = Settings() 
@@ -29,17 +30,13 @@ def uri(s, r):
     print(user)
     print(password)
     if r:
-        status(user, password)
+        status(user, password, driver)
     elif s:
-        webdriver_download(user,password, s)
+        submit_problem(user,password, s)
 
         
-def webdriver_download(user, password, problem):
-    chrome_dir = os.path.dirname(os.path.realpath(__file__))
-    chrome_path = os.path.join(chrome_dir, "chromedriver", "chromedriver")
-    print(chrome_path,chrome_dir, os.path.realpath(__file__))
-    driver = webdriver.Chrome(chrome_path)
-    driver.maximize_window()
+def submit_problem(user, password, problem, driver):
+    driver = create_driver()
     l = LoginPage(driver, user, password)
     if l.login():
         sub = SubPage(driver, problem)
@@ -52,16 +49,20 @@ def webdriver_download(user, password, problem):
     time.sleep(5)
     driver.quit()
 
-def status(user, password):
-    chrome_dir = os.path.dirname(os.path.realpath(__file__))
-    #chrome_path = os.path.join(chrome_dir, "chromedriver", "chromedriver")
-    chrome_path = os.path.join(chrome_dir, "phantomjs", "bin", "phantomjs")
-    print(os.path.isfile(chrome_path))
-    print(os.path.isdir(chrome_path))
-    print(chrome_path,chrome_dir, os.path.realpath(__file__))
-    #driver = webdriver.Chrome(chrome_path)
-    driver = webdriver.PhantomJS(chrome_path)
+def create_driver(type_driver="phantom"):
+    uritools_dir = os.path.dirname(os.path.realpath(__file__))
+    if "phantom" in type_driver:
+        drive_path = os.path.join(uritools_dir, "phantomjs", "bin", "phantomjs")
+        driver = webdriver.PhantomJS(drive_path)
+    else:
+        chrome_path = os.path.join(uritools_dir, "chromedriver", "chromedriver")
+        driver = webdriver.Chrome(chrome_path)
+    #print(chrome_path,chrome_dir, os.path.realpath(__file__))
     driver.maximize_window()
+    return driver
+
+def status(user, password, driver):
+    driver = create_driver(driver)
     l = LoginPage(driver, user, password)
     if l.login():
         driver.get("https://www.urionlinejudge.com.br/judge/pt/runs")
