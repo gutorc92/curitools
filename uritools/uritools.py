@@ -1,21 +1,14 @@
 #!/usr/local/bin/python3.5
-
 import os
 import time
 import codecs
 import sys
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
 import re
-from status import SubStatus
 import click
-from settings import Settings
-from pages import LoginPage, SubPage
+from selenium import webdriver
+from uritools.status import SubStatus
+from uritools.settings import Settings
+from uritools.pages import LoginPage, SubPage
 
 @click.command()
 @click.option('-s', default=1, help='Submeter um problema')
@@ -52,10 +45,10 @@ def submit_problem(user, password, problem, driver):
 def create_driver(type_driver="phantom"):
     uritools_dir = os.path.dirname(os.path.realpath(__file__))
     if "phantom" in type_driver:
-        drive_path = os.path.join(uritools_dir, "phantomjs", "bin", "phantomjs")
+        drive_path = os.path.join(uritools_dir,"phantomjs")
         driver = webdriver.PhantomJS(drive_path)
     else:
-        chrome_path = os.path.join(uritools_dir, "chromedriver", "chromedriver")
+        chrome_path = os.path.join(uritools_dir, "chromedriver")
         driver = webdriver.Chrome(chrome_path)
     #print(chrome_path,chrome_dir, os.path.realpath(__file__))
     driver.maximize_window()
