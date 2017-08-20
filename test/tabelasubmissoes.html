@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8"/><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1026.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script>        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Submissões - URI Online Judge</title>
+
+        <link href="/judge/favicon.ico" type="image/x-icon" rel="icon"/><link href="/judge/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+        <link rel="preconnect" href="https://urionlinejudge.r.worldssl.net">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://www.google-analytics.com">
+
+        <meta name="description" content="URI Online Judge is a project developed by the Computer Science Department of URI University. Our goal is to promote programming practice and knowledge sharing." />
+        <meta name="keywords" content="URI Online Judge, urionlinejudge, uri, online judge, judge, problems, beginner" />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="robots" content="index, nofollow" />
+
+        <meta property="fb:app_id" content="539776889439310" />
+        <meta property="og:title"  content="Submissões - URI Online Judge" /> 
+        <meta property="og:image" content="https://urionlinejudge.r.worldssl.net/judge/img/facebook/uri-made-in-brazil.png" />
+
+        
+        <link href="https://plus.google.com/118420623550385726147" rel="publisher" />
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+
+        
+	<link rel="stylesheet" href="/judge/css/default.css"/>
+
+                        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-28047757-1', {'cookieDomain': 'urionlinejudge.com.br', 'siteSpeedSampleRate': 50});
+            ga('require', 'linkid', 'linkid.js');
+            ga('send', 'pageview');
+        </script>
+    </head>
+    <body class="website-mode">
+        
+        <div id="container">
+
+            <header class="ribbon">
+                
+                <div class="content">
+                    <div class="h-small">
+                        <div class="h-avatar animated rubberBand" style="background-image: url('https://www.gravatar.com/avatar/78d754fb19d9c5ce4b6287883188082c?s=32&d=retro&r=g')">
+                    
+                            <ul class="h-avatar-menu">
+                                <li>
+                                    <a href="/judge/pt/profile/3639">Perfil</a>                                </li>
+                                <li>
+                                    <a href="/judge/pt/account">Configurações</a>                                </li>
+                                <li>
+                                    <a href="/judge/pt/feedbacks/add">Feedbacks</a>                                </li>
+                                <li>
+                                    <a href="/judge/pt/help">Ajuda</a>                                </li>
+                                <li>
+                                    <hr>
+                                </li>
+                                <li>
+                                    <a href="/judge/pt/logout">Sair</a>                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="h-user">
+                            <strong>Hi,</strong> Gustavo Coelho<br/>
+                            <i>gutorc@hotmail.com</i>
+                        </div>
+                    </div>
+                    
+                    <div class="h-large">
+
+                        <ul id="menu">
+                            <li>
+                                <a href="/judge/pt">Home</a>                            </li>
+                            <li>
+                                <a href="/judge/pt/profile/3639">Perfil</a>
+                                
+                                <ul class="h-sub-menu">
+                                    <li>
+                                        <a href="/judge/pt/account">Configurações</a>                                    </li>
+                                    <li>
+                                        <hr>
+                                    </li>
+                                    <li>
+                                    <a href="/judge/pt/users/statistics/3639">Estatísticas</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/users/friends/3639">Amigos</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/friends/invitations">Convites</a>                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/judge/pt/news">News</a><em>14</em>                            </li>
+                            <li>
+                                <a href="/judge/pt/disciplines">Academic</a>                            </li>
+                            <li>
+                                <a href="/judge/pt/contests">Contests</a>                            </li>
+                            <li>
+                                <a href="/judge/pt/forum">Fórum</a>
+                                <ul class="h-sub-menu">
+                                    <li>
+                                    <a href="/judge/pt/questions/latest">Novos</a>                                    </li>
+                                    <li>
+                                        <hr>
+                                    </li>
+                                    <li>
+                                    <a href="/judge/pt/questions/user/3639">Meus Tópicos</a>                                    </li>
+                                    <li>
+                                    <a href="/judge/pt/users/occurrences">Ocorrências</a>                                    </li>
+                                                                    </ul>
+                            </li>
+                            <li>
+                                <a href="/judge/pt/categories">Problemas</a>
+                                <ul class="h-sub-menu">
+                                    <li>
+                                        <a href="/judge/pt/search">Buscar</a>                                    </li>
+                                    <li>
+                                        <hr>
+                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/1">Iniciante</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/2">Ad-Hoc</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/3">Strings</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/4">Estruturas</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/5">Matemática</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/6">Paradigmas</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/7">Grafos</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/problems/index/8">Geometria</a>                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/judge/pt/runs">Submissões</a>
+                                <ul class="h-sub-menu">
+                                    <li>
+                                        <a href="/judge/pt/runs">Todas</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/runs/add">Enviar</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/runs/live">Ao Vivo</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/drafts">Rascunhos</a>                                    </li>
+                                    <li>
+                                        <hr>
+                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/help">Ajuda</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/answers">Respostas</a>                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/judge/pt/rank">Ranks</a>
+                                <ul class="h-sub-menu">
+                                    <li>
+                                        <a href="/judge/pt/rank">RANK PRINCIPAL</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/universities">Universidades</a>                                    </li>
+                                    <li>
+                                        <a href="/judge/pt/countries">Países</a>                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/judge/pt/logout">Sair</a>                            </li>
+                        </ul> 
+                    </div> 
+                </div>
+
+                            </header>
+            
+            
+            <div class="content page">
+                
+<div id="side-bar">
+    <div id="logo">
+    <a href="/judge/pt"><img src="https://www.urionlinejudge.com.br/judge/img/5.0/logo.130615.png" alt="URI Online Judge" title="URI Online Judge" height="94" width="162"/></a></div>
+<ul class="v-menu">
+    <li class="m-live">
+        <a href="/judge/pt/runs/live">AO VIVO</a>
+        <p>
+            O que os outros estão resolvendo.        </p>
+    </li>
+    <li class="m-submissions">
+        <a href="/judge/pt/runs">LISTAR</a>
+        <p>
+            Liste todas as suas submissões.        </p>
+    </li>
+    <li class="m-drafts">
+        <a href="/judge/pt/drafts">RASCUNHOS</a>
+        <p>
+            Liste todos os seus rascunhos.        </p>
+    </li>
+    <li class="m-tried">
+        <a href="/judge/pt/tried">TENTADO</a>
+        <p>
+            Problemas ainda não resolvidos.        </p>
+    </li>
+    <li class="m-help tour-step-help">
+        <a href="/judge/pt/faqs/about/judge">FAQs</a>
+        <p>
+            Precisa de ajuda?        </p>
+    </li>
+    <li class="m-answers">
+        <a href="/judge/pt/answers">RESPOSTAS</a>
+        <p>
+            O que isso significa?        </p>
+    </li>
+    <li class="m-forum">
+        <a href="/judge/pt/questions/latest">FÓRUM</a>
+        <p>
+            Busque por ajuda no Fórum.        </p>
+    </li>
+</ul>
+</div>
+
+<div class="main-content">
+
+    <div id="page-name" class="pn-runs">
+        <h1>SUBMISSÕES</h1>
+        <p>Aqui você pode encontrar todas as suas submissões.</p>
+    </div>
+
+    <div class="filter-box">
+        <h3>Barra de Pesquisa</h3>
+        
+        <form method="post" accept-charset="utf-8" action="/judge/pt/runs"><div style="display:none;"><input type="hidden" name="_method" value="POST"/><input type="hidden" name="_csrfToken" value="52179b3c3d4ee1d54ba4d13ec4937e5ec0d45d2bb449168c4e5a0df40a58e202c9cb6cec48fdd10e06a6b33371cd7d5d29a67771d97073047e8509fe98dc568f"/></div>       
+
+        <div class="search-id">
+            <div class="input text"><input type="text" name="problem_id" placeholder="Problem ID" maxlength="4" autofocus="autofocus" id="problem-id"/></div>        </div>
+
+        <div class="search-type">
+            <div class="input select"><select name="answer_id" placeholder="Resposta" id="answer-id"><option value="">Resposta</option><option value="1">Accepted</option><option value="2">Compilation error</option><option value="3">Runtime error</option><option value="4">Time limit exceeded</option><option value="5">Presentation error</option><option value="6">Wrong answer</option><option value="9">Closed</option></select></div>        </div>
+
+        <div class="search-type">
+            <div class="input select"><select name="language_id" placeholder="Linguagem" id="language-id"><option value="">Linguagem</option><option value="1">C</option><option value="7">C#</option><option value="2">C++</option><option value="14">C99</option><option value="12">Go</option><option value="3">Java</option><option value="11">Java 8</option><option value="4">Python</option><option value="5">Python 3</option><option value="6">Ruby</option><option value="8">Scala</option></select></div>        </div>
+
+        <div class="search-button">
+            <div class="submit"><input type="submit" class="send-red" value="Buscar"/></div>        </div>
+
+        <div style="display:none;"><input type="hidden" name="_Token[fields]" value="38fc637d4e0a29f9ddbe228fbbd253244cd7646c%3A"/><input type="hidden" name="_Token[unlocked]" value=""/></div></form>    </div>
+    
+    <div class="both"></div>
+
+    <div id="table">
+        <div class="list">
+
+            <div id="ajax">
+                <div></div>
+            </div>
+
+            <div id="element">
+                
+<table>
+    <thead>
+        <tr>
+            <th><a class="desc" href="/judge/pt/runs?sort=id&amp;direction=asc">#</a></th>
+            <th></th>
+            <th class="left"><a href="/judge/pt/runs?sort=problem_id&amp;direction=asc">Problema</a></th>
+            <th class="left"><a href="/judge/pt/runs?sort=answer_id&amp;direction=asc">Resposta</a></th>
+            <th><a href="/judge/pt/runs?sort=language_id&amp;direction=asc">Linguagem</a></th>
+            <th>Tempo</th>
+            <th><a href="/judge/pt/runs?sort=created&amp;direction=asc">Data</a></th>
+        </tr>
+    </thead>
+    <tbody>
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7845851">7845851</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1007">1007</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1007">Diferença</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7845851">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    20/08/17 01:50:16                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7845791">7845791</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7845791">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    20/08/17 01:32:36                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7845786">7845786</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7845786">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    20/08/17 01:31:33                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7845774">7845774</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7845774">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    20/08/17 01:28:32                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7845772">7845772</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7845772">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    20/08/17 01:28:08                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7843617">7843617</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-6">
+                    <a href="/judge/pt/runs/code/7843617">Wrong answer</a> (100%)                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 19:05:53                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7843532">7843532</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7843532">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 18:56:47                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839940">7839940</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839940">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 12:25:41                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839773">7839773</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/2057">2057</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/2057">Fuso Horário</a>                </td>
+                <td class="semi-wide answer a-6">
+                    <a href="/judge/pt/runs/code/7839773">Wrong answer</a> (100%)                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 12:01:03                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839754">7839754</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1008">1008</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1008">Salário</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839754">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:58:29                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839745">7839745</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1006">1006</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1006">Média 2</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839745">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:57:03                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839742">7839742</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1005">1005</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1005">Média 1</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839742">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:56:20                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839737">7839737</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1004">1004</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1004">Produto Simples</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839737">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:55:47                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839727">7839727</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1003">1003</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1003">Soma Simples</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839727">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:54:41                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839715">7839715</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1002">1002</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1002">Área do Círculo</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839715">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:53:00                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7839702">7839702</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1001">1001</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1001">Extremamente Básico</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7839702">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    19/08/17 11:51:34                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7795331">7795331</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1051">1051</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1051">Imposto de Renda</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7795331">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    15/08/17 22:23:16                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7795289">7795289</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1051">1051</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1051">Imposto de Renda</a>                </td>
+                <td class="semi-wide answer a-6">
+                    <a href="/judge/pt/runs/code/7795289">Wrong answer</a> (20%)                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    15/08/17 22:17:04                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7795163">7795163</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1047">1047</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1047">Tempo de Jogo com Minutos</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7795163">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    15/08/17 21:59:01                </td>
+            </tr>
+
+                    <tr class="par">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7795085">7795085</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1047">1047</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1047">Tempo de Jogo com Minutos</a>                </td>
+                <td class="semi-wide answer a-6">
+                    <a href="/judge/pt/runs/code/7795085">Wrong answer</a> (40%)                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    15/08/17 21:49:45                </td>
+            </tr>
+
+                    <tr class="impar">
+                <td class="id">
+                    <a href="/judge/pt/runs/code/7794900">7794900</a>                </td>
+                <td class="tiny">
+                    <a href="/judge/pt/problems/view/1045">1045</a>                </td>
+                <td class="wide">
+                    <a href="/judge/pt/problems/view/1045">Tipos de Triângulos</a>                </td>
+                <td class="semi-wide answer a-1">
+                    <a href="/judge/pt/runs/code/7794900">Accepted</a>                </td>
+                <td class="center">
+                    C++                </td>
+                <td class="tiny">
+                    0.000                </td>
+                <td class="center">
+                    15/08/17 21:33:55                </td>
+            </tr>
+
+                
+            </tbody>
+</table>
+
+<div id="table-info">
+    1 of 8</p>
+</div>
+
+<div id="table-paging">
+    <li class="first disabled"><a href="" onclick="return false;">Primeiro</a></li><li class="prev disabled"><a href="" onclick="return false;">Anterior</a></li><li class="next"><a rel="next" href="/judge/pt/runs?page=2">Próximo</a></li><li class="last"><a href="/judge/pt/runs?page=8">Último</a></li></div>            </div>
+        </div>
+    </div>
+</div>
+                <div class="both"></div>
+            </div>
+        
+            <footer class="ribbon">
+    <div class="footer-content">
+
+        <div class="site-coyright">&copy; 2011 - 2017 URI Online Judge</div>
+        
+        <ul class="site-information">
+            <li>
+                <a href="/judge/pt/cookies">Cookies</a>            </li>
+            <li class="division">|</li>
+            <li>
+                <a href="/judge/pt/privacy">Privacidade</a>            </li>
+            <li class="division">|</li>
+            <li>
+                <a href="/judge/pt/terms-and-conditions">Termos & Condições</a>            </li>
+            <li class="division">|</li>
+            <li>
+                <a href="/judge/pt/faqs/about/judge">FAQs</a>            </li>
+            <li class="division">|</li>
+            <li>
+                <a href="http://status.urionlinejudge.com.br/" target="_blank">Status</a>            </li>
+            <li class="division">|</li>
+            <li>
+                <a href="/judge/pt/credits">Créditos</a>            </li>
+            <li class="division">|</li>
+            <li>
+                <a href="/judge/pt/contact">Contato</a>            </li>
+        </ul>
+        
+        <div class="site-version">Version 5.0.9.150417</div>
+    </div>
+</footer>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        
+	<script src="https://urionlinejudge.r.worldssl.net/judge/js/auxiliary.min.js"></script>
+	<script src="https://urionlinejudge.r.worldssl.net/judge/js/default.js"></script>
+    <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"ec7894ef50","applicationID":"11696224","transactionName":"MgdSYUoEXBYAVEENCQtNZUdRSlgQBVBQSxEAAEJaVxEdDA9TUBxIFQpA","queueTime":0,"applicationTime":168,"atts":"HkBRFwIeTxg=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
