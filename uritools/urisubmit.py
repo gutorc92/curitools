@@ -29,7 +29,6 @@ def uri(s, r):
     print(user)
     print(password)
     if r:
-        print("Aqui")
         status(user, password)
     elif s:
         webdriver_download(user,password, s)
@@ -70,7 +69,6 @@ def status(user, password):
         sub.print_table()
     else:
         print("Deu errado")
-    time.sleep(5)
     driver.quit()
 
 if __name__ == "__main__":
