@@ -123,9 +123,13 @@ def webdriver_download(user, password, problem):
 
 def status(user, password):
     chrome_dir = os.path.dirname(os.path.realpath(__file__))
-    chrome_path = os.path.join(chrome_dir, "chromedriver", "chromedriver")
+    #chrome_path = os.path.join(chrome_dir, "chromedriver", "chromedriver")
+    chrome_path = os.path.join(chrome_dir, "phantomjs", "bin", "phantomjs")
+    print(os.path.isfile(chrome_path))
+    print(os.path.isdir(chrome_path))
     print(chrome_path,chrome_dir, os.path.realpath(__file__))
-    driver = webdriver.Chrome(chrome_path)
+    #driver = webdriver.Chrome(chrome_path)
+    driver = webdriver.PhantomJS(chrome_path)
     driver.maximize_window()
     l = LoginPage(driver, user, password)
     if l.login():
