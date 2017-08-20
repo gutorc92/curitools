@@ -4,7 +4,6 @@ import os
 import time
 import codecs
 import sys
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),"selenium"))
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
