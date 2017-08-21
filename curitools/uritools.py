@@ -6,9 +6,9 @@ import sys
 import re
 import click
 from selenium import webdriver
-from uritools.status import SubStatus
-from uritools.settings import Settings
-from uritools.pages import LoginPage, SubPage
+from curitools.status import SubStatus
+from curitools.settings import Settings
+from curitools.pages import LoginPage, SubPage
 
 @click.command()
 @click.option('-s', default=1, help='Submeter um problema')

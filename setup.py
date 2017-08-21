@@ -6,7 +6,7 @@ with open(path.join(here, 'README.rst')) as f:
     long_description = f.read()
 
 setup(
-    name='UriTools',
+    name='CUriTools',
     version='0.1dev',
     packages=find_packages(),
     url='https://github.com/gutorc92/uritools',
@@ -17,11 +17,11 @@ setup(
     install_requires=['selenium','click','clint'],
     entry_points={
         'console_scripts': [
-            'uritools=uritools.uritools:uri',
+            'curitools=curitools.uritools:uri',
         ],
     },
     package_data={
-        'uritools': ['phantomjs','chromedriver'],
+        'curitools': ['phantomjs','chromedriver'],
     },
     
 )
