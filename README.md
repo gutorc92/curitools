@@ -2,6 +2,11 @@
 Uma ferramenta de linha de commando para interagir com o web site [URI](https://www.urionlinejudge.com.br/) online
 judge
 
+## Instalação
+
+```
+    pip install curitools 
+```
 ## Configuração
 
 Para usar a ferramenta basta colocar no diretório onde os problemas são
