@@ -19,8 +19,8 @@ resolvidos um arquivo .uri.settings. O arquivo deve conter duas linhas:
 
 .. code:: python
 
-    user : {nome do usuario} 
-    password: {senha do usuario}
+    user : nome do usuario
+    password: senha do usuario
 
 
 **nunca comite esse arquivo**

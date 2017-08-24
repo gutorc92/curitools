@@ -13,8 +13,8 @@ Para usar a ferramenta basta colocar no diretório onde os problemas são
 resolvidos um arquivo .uri.settings. O arquivo deve conter duas linhas:
 
 ```
-    user : {nome do usuario} 
-    password: {senha do usuario}
+    user : nome do usuario
+    password: senha do usuario
 ```
 
 ps: nunca comite esse arquivo.

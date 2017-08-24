@@ -7,7 +7,7 @@ import re
 import click
 from selenium import webdriver
 from curitools.status import SubStatus
-from curitools.settings import Settings
+from curitools.settings import Settings, MissingFileSettings
 from curitools.pages import LoginPage, SubPage
 
 @click.command()
@@ -18,7 +18,11 @@ def uri(s, r, driver):
     """Simple program that greets NAME for a total of COUNT times."""
     
     settings = Settings() 
-    user, password = settings.get_settings()
+    try:
+        user, password = settings.get_settings()
+    except MissingFileSettings:
+        priint(e.message)
+        sys.exit()
     print(user)
     print(password)
     print(s)

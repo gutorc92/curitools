@@ -2,6 +2,10 @@ import os
 import time
 import codecs
 import re
+import getpass
+
+class MissingFileSettings(Exception):
+    pass
 
 class Settings(object):
     
@@ -9,6 +13,10 @@ class Settings(object):
         self.file_path = file_path if file_path is not None else self.find_settings_file()
 
     def find_settings_file(self):
+        uritools_dir = os.path.expanduser("~")
+        file_settings = os.path.join(uritools_dir, ".uri.settings")
+        if os.path.isfile(file_settings):
+            return file_settings
         uritools_dir = os.path.dirname(os.path.realpath(__file__))
         file_settings = os.path.join(uritools_dir, ".uri.settings")
         if os.path.isfile(file_settings):
@@ -23,9 +31,31 @@ class Settings(object):
         if os.path.isfile(file_settings):
             return file_settings
         else:
-            print("Você precisa adicionar um arquivo de configuracoes")
+            print("Nao foi encontrado um arquivo de configuracoes")
+            if self.create_file_settings():
+                uritools_dir = os.path.expanduser("~")
+                file_settings = os.path.join(uritools_dir, ".uri.settings")
+                return file_settings
             return None
 
+    def create_file_settings(self):
+        var = input("Voce deseja criar o arquivo de configuracao:[S/N] ")
+        if "S" in var:    
+            user = input("Digite o seu email: ")
+            password = getpass.getpass("Digite a sua senha: ")
+            uritools_dir = os.path.expanduser("~")
+            file_settings = os.path.join(uritools_dir, ".uri.settings")
+            if user and password:
+                user = "user: " + user + "\n"
+                password = "password: " + password
+                with open(file_settings, "w") as handle:
+                    handle.write(user)
+                    handle.write(password)
+                return True
+        else:
+            print("O arquivo de configuracao e necessario")
+            return False
+            
     def get_user(self,line):
         m = re.search("user: (.*)", line)
         if m is not None:
@@ -41,6 +71,8 @@ class Settings(object):
     def read_settings(self):
         user = ""
         password = ""
+        if self.file_path is None:
+             raise MissingFileSettings("O arquivo de configuracão nao foi encontrado")
         with open(self.file_path, "r") as handle:
             for line in handle:
                 if self.get_user(line) is not None:
