@@ -7,7 +7,7 @@ with open(path.join(here, 'README.rst')) as f:
 
 setup(
     name='CUriTools',
-    version='0.3',
+    version='0.4',
     packages=find_packages(),
     url='https://github.com/gutorc92/uritools',
     author='Gustavo Coelho',

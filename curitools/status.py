@@ -13,7 +13,7 @@ def read_input(file_name):
     fn.close()
     return text
 
-class SubStatus(object):
+class SubmissionStatusOutput(object):
     
     def __init__(self, page):
         self.page = page
