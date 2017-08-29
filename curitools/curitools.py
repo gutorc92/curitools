@@ -6,7 +6,8 @@ import sys
 import re
 import click
 from curitools.settings import Settings, MissingFileSettings
-import curitools.requestpages as rp
+import curitools.requestpages.pages as rp
+from requests.exceptions import HTTPError
 
 
 @click.command()
@@ -19,19 +20,31 @@ def uri(s, r):
     try:
         user, password = settings.get_settings()
     except MissingFileSettings:
-        priint(e.message)
+        print(e.message)
         sys.exit()
     print(user)
     print(password)
+    print(r)
     print(s)
-    login = rp.LoginPage(user=user, password=password)
-    login.run()
+    try:
+        print("Passou aqui")
+        login = rp.LoginPage(user=user, password=password)
+        print("Criou essa porra")
+        login.run()
+    except HTTPError:
+        print("Errou")
+        sys.exit()
+    
+
     if r:
-       sub = rp.TabelaSubmissionPage(login.get_session())
+       print("Aqui")
+       sub = rp.TabelaSubmissionPage(session=login.get_session())
        sub.run() 
     elif s:
        sub = rp.SubmissionPage(login.get_session(), s)
        sub.run() 
+    else:
+       print("Cu do carai")
 
 
 if __name__ == "__main__":

@@ -19,8 +19,12 @@ class BasePage(object):
 
     def get_page(self):
         response = self.session.get(self.url)
-        page = BeautifulSoup(response.content, "html.parser")
-        return page
+        print(response.status_code)
+        if response.status_code == req.codes.ok:
+            page = BeautifulSoup(response.content, "html.parser")
+            return page
+        else:
+            response.raise_for_status()
 
     def get_session(self):
         return self.session
@@ -28,7 +32,8 @@ class BasePage(object):
     def run(self):
         pass
 
-    def find_forms_fields(page):
+    def find_forms_fields(self, page):
+        print("Forming")
         form_html = page.find("form")
         inputs = form_html.findAll("input", {"type":"hidden"})
         form = {}
@@ -42,9 +47,9 @@ class BasePage(object):
 
 class SubmissionPage(BasePage):
     
-    def __init__(self, session = None, problem, file_path=None, language = None):
-        super(SubPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/runs/add")
-        self.problem = problem
+    def __init__(self, session = None, problem = None, file_path=None, language = None):
+        super(SubmissionPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/runs/add")
+        self.problem = problem 
         self.file_path = file_path if file_path is not None else self.get_file_path()
         self.language = 2 if language is None else language
         print(self.file_path)
@@ -66,9 +71,6 @@ class SubmissionPage(BasePage):
         print(type(files))
         if len(files) == 1:
             return os.path.join(os.getcwd(),files[0] ) 
-  
-    def print_submissions(self):
-    
 
     def run(self):
         text = self.read_file()
@@ -95,8 +97,11 @@ class LoginPage(BasePage):
         self.password = password 
 
     def run(self):
+        print("Running login")
         page = self.get_page()
-        form = self.find_forms_field(page)
+        print("Getting page")
+        form = self.find_forms_fields(page)
+        print("Getting form")
         form["email"] = self.user
         form["password"] = self.password
         print(form)
@@ -106,10 +111,17 @@ class LoginPage(BasePage):
 class TabelaSubmissionPage(BasePage):
     
     def __init__(self,session = None):
+        print(session)
         super(TabelaSubmissionPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/runs")
 
     def run(self):
-        response_final = self.session.get(self.url) 
-        status = SubmissionStatusOutput(response.content)
-        status.print_table()
+        try:
+            response_final = self.session.get(self.url) 
+        except:
+            return 1
+        if response_final.status_code == req.codes.ok:
+            status = SubmissionStatusOutput(response_final.content)
+            status.print_table()
+        else:
+            return 1
         
