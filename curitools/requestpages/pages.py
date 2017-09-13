@@ -19,7 +19,7 @@ class BasePage(object):
 
     def get_page(self):
         response = self.session.get(self.url)
-        print(response.status_code)
+        #print(response.status_code)
         if response.status_code == req.codes.ok:
             page = BeautifulSoup(response.content, "html.parser")
             return page
@@ -33,16 +33,16 @@ class BasePage(object):
         pass
 
     def find_forms_fields(self, page):
-        print("Forming")
+        #print("Forming")
         form_html = page.find("form")
         inputs = form_html.findAll("input", {"type":"hidden"})
         form = {}
         for inp in inputs:
             name = inp["name"] 
             value = inp["value"]
-            print(inp["name"], inp["value"])
+            #print(inp["name"], inp["value"])
             form[name] = value
-        print(form)
+        #print(form)
         return(form)
 
 class SubmissionPage(BasePage):
@@ -52,14 +52,14 @@ class SubmissionPage(BasePage):
         self.problem = problem 
         self.file_path = file_path if file_path is not None else self.get_file_path()
         self.language = 2 if language is None else language
-        print(self.file_path)
+        #print(self.file_path)
     
     def read_file(self):
         text = ""
         with open(self.file_path, "r") as handle:
-            text = handle.readlines()
+            text = handle.read()
         #text = [line.replace("\n","\\n") for line in text ]
-        text = [line.replace("\"","\\\"") for line in text ]
+        #text = [line.replace("\"","\\\"") for line in text ]
         return text
 
     def get_file_path(self):
@@ -67,21 +67,27 @@ class SubmissionPage(BasePage):
         files = [ x for x in files if x.startswith(str(self.problem))]
         #r = re.compile("^" + str(self.problem))
         #files = filter(r.match, files)
-        print(files)
-        print(type(files))
+        #print(files)
+        #print(type(files))
         if len(files) == 1:
             return os.path.join(os.getcwd(),files[0] ) 
 
     def run(self):
         text = self.read_file()
+        #print(text)
         page = self.get_page()
-        form = self.find_forms_field(page)
+        form = self.find_forms_fields(page)
         form["problem_id"] = self.problem
         form["language_id"] = self.language
         form["source_code"] = text 
-        print(form)
+        #print("form final: ")
+        #print(form)
         response = self.session.post(self.url, data=form)
-        print(response)
+        #print(response)
+        if response.status_code == req.codes.ok:
+            return True
+        else:
+            return False
         
  
 
@@ -97,21 +103,21 @@ class LoginPage(BasePage):
         self.password = password 
 
     def run(self):
-        print("Running login")
+        #print("Running login")
         page = self.get_page()
-        print("Getting page")
+        #print("Getting page")
         form = self.find_forms_fields(page)
-        print("Getting form")
+        #print("Getting form")
         form["email"] = self.user
         form["password"] = self.password
-        print(form)
+        #print(form)
         response = self.session.post(self.url, data=form)
-        print(response)
+        #print(response)
         
 class TabelaSubmissionPage(BasePage):
     
     def __init__(self,session = None):
-        print(session)
+        #print(session)
         super(TabelaSubmissionPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/runs")
 
     def run(self):

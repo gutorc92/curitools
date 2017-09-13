@@ -7,8 +7,8 @@ with open(path.join(here, 'README.rst')) as f:
 
 setup(
     name='CUriTools',
-    version='0.4',
-    packages=find_packages(),
+    version='0.5',
+    packages=find_packages(exclude=["tests"]),
     url='https://github.com/gutorc92/uritools',
     author='Gustavo Coelho',
     author_email='gutorc@hotmail.com',
@@ -17,7 +17,7 @@ setup(
     install_requires=['selenium','click','clint','bs4'],
     entry_points={
         'console_scripts': [
-            'curitools=curitools.uritools:uri',
+            'curitools=curitools.curitools:uri',
         ],
     },
     package_data={
