@@ -80,7 +80,7 @@ class Settings(object):
                 if self.get_password(line) is not None:
                     password = self.get_password(line)
         self.user = user
-        self.passwrod = password
+        self.password = password
         return user,password
 
     def get_settings(self):
