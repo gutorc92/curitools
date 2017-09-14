@@ -1,4 +1,4 @@
-# CUriTools
+# CUriTools [![Build Status](https://travis-ci.org/gutorc92/curitools.svg?branch=master)](https://travis-ci.org/gutorc92/curitools)
 Uma ferramenta de linha de commando para interagir com o web site [URI](https://www.urionlinejudge.com.br/) online
 judge
 
