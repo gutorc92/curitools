@@ -9,20 +9,23 @@ class TestSubPage(unittest.TestCase):
         repositorio_dir = os.path.dirname(os.path.realpath(__file__))
         file_submit = os.path.join(repositorio_dir, "1011.cpp")
         sub = rp.SubmissionPage(session=None,problem="1011", file_path=file_submit)
-        text = """
-            #include<iostream>                                                              
-            
-            using namespace std;                                                            
-                                                                                   
-            int main(){                                                                     
-                 int total = 10;                                                             
-                 cout << "VALOR A PAGAR: R$ " << total <<endl;                               
-                 return 1 ;                                                                  
-             }
-        """
-        assert sub.read_file() == text
+        text = """#include<iostream>
+
+using namespace std;
+
+int main(){
+    int total = 10;
+    cout << "VALOR A PAGAR: R$ " << total <<endl;
+    return 1 ;
+}"""
+        self.maxDiff = None
+        list1 = text.splitlines() 
+        list2 = sub.read_file().splitlines()
+        self.assertEqual(len(list1), len(list2))
+        for line1, line2 in zip(list1, list2): 
+            self.assertEqual(line1, line2)
  
-    def test_submission(self):
+    def submission(self):
         try:
             login = rp.LoginPage()
             login.run()
