@@ -5,11 +5,6 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst')) as f:
     long_description = f.read()
 
-t_dir = path.join(here, "curitools", "templates")
-template_files = [path.join(t_dir, f) for f in listdir(t_dir)]
-
-print(template_files)
-print(find_packages(exclude=["curitools.tests"]))       
 
 setup(
     name='CUriTools',
@@ -22,6 +17,9 @@ setup(
     long_description=long_description,
     keywords='uri',
     install_requires=['requests','click','clint','bs4'],
+    package_data={
+        'curitools':  ["templates/*"],
+    },
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -41,9 +39,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    package_data={
-        'curitools/templates': template_files,
-    },
     entry_points={
         'console_scripts': [
             'curitools=curitools.curitools:uri',

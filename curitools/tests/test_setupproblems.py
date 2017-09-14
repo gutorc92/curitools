@@ -13,7 +13,7 @@ class TestSetupProblem(unittest.TestCase):
         self.setup = SetupProblem("1010", cwd, self.template_dir, "c++")
          
     def test_hasmakefiles(self):
-        self.assertFalse(self.setup.has_makefile())
+        self.assertTrue(self.setup.has_makefile())
 
     def test_get_base_template(self):
         base_file = os.path.join(self.template_dir, "base.cpp")
