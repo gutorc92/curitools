@@ -8,7 +8,8 @@ class TestSetupProblem(unittest.TestCase):
     def setUp(self):
         cwd = os.getcwd()
         template_dir = os.path.dirname(os.path.realpath(__file__))
-        self.template_dir = os.path.join(template_dir, "templates")
+        self.test_dir = os.path.dirname(os.path.realpath(__file__))
+        self.template_dir = os.path.join(template_dir,"..", "templates")
         print(self.template_dir)
         self.setup = SetupProblem("1010", cwd, self.template_dir, "c++")
          
@@ -22,6 +23,12 @@ class TestSetupProblem(unittest.TestCase):
     def test_get_makefile_template(self):
         makefile = os.path.join(self.template_dir, "Makefile.c++")
         self.assertEqual(makefile, self.setup.get_makefile_template())
+
+    def test_create_makefile(self):
+        self.setup.create_makefile(self.test_dir)
+        self.assertTrue(os.path.exists(os.path.join(os.getcwd(),"Makefile"))) 
+        os.remove(os.path.join(self.test_dir,"Makefile"))
+        
 
 if __name__ == '__main__':
     unittest.main()

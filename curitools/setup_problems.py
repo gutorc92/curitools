@@ -44,9 +44,12 @@ class SetupProblem(object):
                 problem_file =  os.path.join(self.workdir, self.problem, problem_file)  
                 copy(base_file, problem_file)
                 if self.has_makefile():
-                    make_file = self.get_makefile_template()
-                    make_file_dst = os.path.join(self.workdir, self.problem, "Makefile")
-                    copy(make_file, make_file_dst)  
+                    self.create_makefile(problem_dir)
+
+    def create_makefile(self, problem_dir):
+        make_file = self.get_makefile_template()
+        make_file_dst = os.path.join(problem_dir, "Makefile")
+        copy(make_file, make_file_dst)  
 
 
 
