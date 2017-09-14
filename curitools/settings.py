@@ -72,7 +72,7 @@ class Settings(object):
         user = ""
         password = ""
         if self.file_path is None:
-             raise MissingFileSettings("O arquivo de configuracão nao foi encontrado")
+             raise MissingFileSettings("O arquivo de configuracao nao foi encontrado")
         with open(self.file_path, "r") as handle:
             for line in handle:
                 if self.get_user(line) is not None:
