@@ -26,7 +26,7 @@ class TestSetupProblem(unittest.TestCase):
 
     def test_create_makefile(self):
         self.setup.create_makefile(self.test_dir)
-        self.assertTrue(os.path.exists(os.path.join(os.getcwd(),"Makefile"))) 
+        self.assertTrue(os.path.exists(os.path.join(self.test_dir,"Makefile"))) 
         os.remove(os.path.join(self.test_dir,"Makefile"))
         
 
