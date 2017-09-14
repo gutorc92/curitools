@@ -28,10 +28,30 @@ class SubmissionStatusOutput(object):
             text = colored.yellow(text)
         return text
        
-    def print_table(self):
+    def format_table(self):
         for lines in self.table:
-            for column in lines:
-                print(column,'|', end=" ", flush=True)
+            if len(lines) == 7:
+                lines.pop(0)
+        
+    def get_max_length(self):
+        max_column = []
+        for lines in self.table:
+            for i in range(0, len(lines)):
+                try:
+                    if max_column[i] < len(lines[i]):
+                        max_column[i] = len(lines[i])
+                except IndexError:
+                    max_column.insert(i,len(lines[i]))
+        self.max_column = max_column
+
+    def print_table(self):
+        self.extract_table()
+        self.format_table()
+        self.get_max_length()
+        for lines in self.table:
+            for i in range(0, len(lines)):
+                text = "{0:{width}}".format(lines[i], width = self.max_column[i])
+                print(self.format_result(text),'|', end=" ", flush=True)
             print("")
 
     def extract_table(self):
@@ -43,8 +63,6 @@ class SubmissionStatusOutput(object):
                 if l.find('sup'):
                     l.find('sup').extract()
                 line_list.append(l.getText().replace("\n","").strip())
-                #print(self.format_result(l.getText().replace("\n","").strip()),'|', end=" ", flush=True)
-            #print("")
             lines.append(line_list)
         self.table = lines
         

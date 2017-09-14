@@ -13,6 +13,9 @@ class TestSubmissionsPage(unittest.TestCase):
         fn.close()
         s = SubmissionStatusOutput(text)
         s.extract_table()
+        s.format_table()
+        s.get_max_length()
+        self.assertEqual(len(s.max_column), 6)
         s.print_table()
         self.assertEqual(len(s.table), 22)
 

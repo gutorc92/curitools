@@ -14,14 +14,12 @@ setup(
     author_email='gutorc@hotmail.com',
     license='Creative Commons Attribution-Noncommercial-Share Alike license',
     long_description=long_description,
+    keywords='uri',
     install_requires=['requests','click','clint','bs4'],
     entry_points={
         'console_scripts': [
             'curitools=curitools.curitools:uri',
         ],
-    },
-    package_data={
-        'curitools': ['phantomjs','chromedriver'],
     },
     
 )
