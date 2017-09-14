@@ -6,14 +6,16 @@ import sys
 import re
 import click
 from curitools.settings import Settings, MissingFileSettings
+from curitools.setup_problems import SetupProblem
 import curitools.requestpages.pages as rp
 from requests.exceptions import HTTPError
 
 
 @click.command()
 @click.option('-s', default=1, help='Submeter um problema')
+@click.option('-c', default=1, help='Criar arquivos para desenvolver o problema')
 @click.option('-r', is_flag=True, help='Imprimir tabela de submissoes')
-def uri(s, r):
+def uri(s, c, r):
     """Simple program that greets NAME for a total of COUNT times."""
     
     settings = Settings() 
@@ -33,6 +35,12 @@ def uri(s, r):
     if r:
        sub = rp.TabelaSubmissionPage(session=login.get_session())
        sub.run() 
+    elif c:
+        cwd = os.getcwd()
+        template_dir = os.path.dirname(os.path.realpath(__file__))
+        template_dir = os.path.join(template_dir, "templates")
+        setup = SetupProblem(str(c), cwd, template_dir, "c++")
+        setup.create_files()
     elif s:
        sub = rp.SubmissionPage(login.get_session(), s)
        sub.run() 
