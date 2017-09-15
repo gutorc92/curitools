@@ -42,14 +42,14 @@ class TestSetupProblem(unittest.TestCase):
         self.assertTrue(os.path.exists(os.path.join(self.test_dir,"1006", "Makefile"))) 
         rmtree(os.path.join(self.test_dir,"1006"))
         self.setup = SetupProblem("1010", os.path.join(self.test_dir, "test_settings.py"), self.template_dir, "c++")
-        self.assertRaises(NotADirectoryError, self.setup.create_files())
+        self.assertRaises(NotADirectoryError, self.setup.create_files)
 
     def test_create_base_files(self):
         self.setup.create_base_files(self.test_dir)
         self.assertTrue(os.path.exists(os.path.join(self.test_dir,"1006.cpp"))) 
         os.remove(os.path.join(self.test_dir,"1006.cpp"))   
         self.setup = SetupProblem("1010", os.getcwd(), os.path.join(self.template_dir, ".."), "c++")
-        #self.assertRaises(FileExistsError, self.setup.create_base_files(self.test_dir))
+        self.assertRaises(FileExistsError, self.setup.create_base_files, self.test_dir)
 
 if __name__ == '__main__':
     unittest.main()
