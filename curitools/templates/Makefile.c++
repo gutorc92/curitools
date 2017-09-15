@@ -8,7 +8,10 @@ CXX=g++
 
 TARGET = prog
 
-PROG1=namefile
+obj = $(wildcard *.cpp)
 
-$(TARGET): $(PROG1)
-	$(CXX) $(CPPFLAGS) -o $(TARGET) $(PROG1)
+all:  $(TARGET)
+
+$(TARGET): $(obj)
+	@echo $< 
+	$(CXX) $(CPPFLAGS) $< -o $(TARGET) 
