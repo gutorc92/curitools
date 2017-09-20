@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import requests as req
 from curitools.settings import Settings
 from curitools.status import SubmissionStatusOutput
+import logging as l
 
 class BasePage(object):
     
@@ -52,7 +53,7 @@ class SubmissionPage(BasePage):
         self.problem = problem 
         self.file_path = file_path if file_path is not None else self.get_file_path()
         self.language = 2 if language is None else language
-        #print(self.file_path)
+        l.debug("The parameters of submission page: problem %s, file_path %s, language %s", str(problem), str(self.file_path), str(language))
     
     def read_file(self):
         text = ""
@@ -64,24 +65,19 @@ class SubmissionPage(BasePage):
 
     def get_file_path(self):
         files = os.listdir(os.getcwd())
+        l.debug("Files found: %s", str(files))
         files = [ x for x in files if x.startswith(str(self.problem))]
-        #r = re.compile("^" + str(self.problem))
-        #files = filter(r.match, files)
-        #print(files)
-        #print(type(files))
         if len(files) == 1:
             return os.path.join(os.getcwd(),files[0] ) 
 
     def run(self):
         text = self.read_file()
-        #print(text)
         page = self.get_page()
         form = self.find_forms_fields(page)
         form["problem_id"] = self.problem
         form["language_id"] = self.language
         form["source_code"] = text 
-        #print("form final: ")
-        #print(form)
+        l.debug("The form will be send as %s", str(form))
         response = self.session.post(self.url, data=form)
         #print(response)
         if response.status_code == req.codes.ok:
