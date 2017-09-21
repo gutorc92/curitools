@@ -12,11 +12,11 @@ class TestSubmissionsPage(unittest.TestCase):
         text = fn.read()
         fn.close()
         s = ProblemOutput(text)
-        s.extract_table()
+        self.assertEqual(s.get_title(), "Números Ímpares")
+        self.assertEqual(s.get_input(), "O arquivo de entrada contém 1 valor inteiro qualquer.")
+        self.assertEqual(s.get_output(), "Imprima todos os valores ímpares de 1 até X, inclusive X, se for o caso.")
         s.print_table()
-        self.assertEqual(len(s.max_column), 6)
 
-        self.assertEqual(len(s.table), 22)
 
     
 if __name__ == '__main__':

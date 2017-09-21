@@ -74,58 +74,57 @@ class ProblemOutput(object):
 
     def separar_quadro(self):
         soup = BeautifulSoup(self.page, 'html.parser')
-        self.content  = soup.find("iframe", {"id": "description-html"})
+        self.content  = soup.find("body")
 
     def get_title(self):
+        if not hasattr(self, "content"):
+            self.separar_quadro()
         title = self.content.find("div", {"class", "header"})
         if title:
             self.title = title.find("h1").getText()
             l.debug("Title of the problem %s", str(title))
         else:
             l.debug("Title not found")
+        return self.title
 
     def get_problem_div(self):
+        if not hasattr(self, "content"):
+            self.separar_quadro()
         problem_div = self.content.find("div", {"class" : "problem"})
         return problem_div
 
     def get_description(self):
+        self.description = self.get_text_div("description")
+        return self.description
+
+    def get_text_div(self, class_name):
         problem = self.get_problem_div()
-        description_div = problem.find("div", {"class":"description"})
-        description = description_div.find("p")
-        if description:
-            self.description = description.getText()
+        div = problem.find("div", {"class": class_name})
+        div = div.find("p")
+        if div:
+            text = div.getText()
+            text = text.replace("\n", "")
+            text = text.replace("\t","")
+            return text
         else:
-            l.debug("Description not found.")
-        return description
+            l.debug("Input not found for class: %s", class_name)
+        return None
 
-    def format_result(self, text):
-        if "Accepted" in text:
-            text = colored.green(text)
-        elif "Wrong" in text:
-            text = colored.red(text)
-        elif "Compilation" in text:
-            text = colored.yellow(text)
-        return text
+    def get_output(self):
+        self.output_text = self.get_text_div("output")
+        return self.output_text
 
-    def format_table(self):
-        for lines in self.table:
-            if len(lines) == 7:
-                lines.pop(0)
-
-    def get_max_length(self):
-        max_column = []
-        for lines in self.table:
-            for i in range(0, len(lines)):
-                try:
-                    if max_column[i] < len(lines[i]):
-                        max_column[i] = len(lines[i])
-                except IndexError:
-                    max_column.insert(i, len(lines[i]))
-        self.max_column = max_column
+    def get_input(self):
+        self.input_text = self.get_text_div("input")
+        return self.input_text
 
     def print_table(self):
-        print(self.get_title())
-        print(self.get_description())
+        self.separar_quadro()
+        print("Titulo", self.get_title())
+        print("Description", self.get_description())
+        print("Input", self.get_input())
+        print("Output", self.get_output())
+
     def extract_table(self):
         self.separar_quadro()
         lines = []
