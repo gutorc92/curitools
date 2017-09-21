@@ -124,11 +124,22 @@ class ProblemOutput(object):
         print("Description", self.get_description())
         print("Input", self.get_input())
         print("Output", self.get_output())
+        self.print_inandoutput()
+
+    def print_inandoutput(self):
+        self.extract_table()
+        for lines in self.table:
+            for i in range(0, len(lines)):
+                text = "{0:{width}}".format(lines[i], width = 40)
+                print(self.format_result(text),'|', end=" ", flush=True)
+            print("")
 
     def extract_table(self):
         self.separar_quadro()
+        problem_div = self.get_problem_div()
+        table = problem_div.find("table")
         lines = []
-        for line in self.table.findAll('tr'):
+        for line in table.findAll('tr'):
             line_list = []
             for l in line.findAll('td'):
                 if l.find('sup'):
