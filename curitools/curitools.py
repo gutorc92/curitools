@@ -10,6 +10,7 @@ from curitools.setup_problems import SetupProblem
 import curitools.requestpages.pages as rp
 from requests.exceptions import HTTPError
 import logging
+import tempfile
 
 @click.command()
 @click.option('-s', default=0, help='Submeter um problema')
@@ -17,7 +18,8 @@ import logging
 @click.option('-r', is_flag=True, help='Imprimir tabela de submissoes')
 @click.option('-d', is_flag=True, help='Debug output')
 def uri(s, c, r, d):
-    """Simple program that greets NAME for a total of COUNT times."""
+    """Simple program to use with URI"""
+    fp = None
     if(d): 
         log_file = os.path.join(os.getcwd(), "curitools.log")
         print("log_file")
@@ -25,7 +27,8 @@ def uri(s, c, r, d):
         logging.basicConfig(filename=log_file, format='%(levelname)s:%(message)s', level=logging.DEBUG)
         logging.debug("The value of s: %s, c: %s, r: %s, d: %s", str(s), str(c), str(r), str(d)) 
     else:
-        logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.WARNING)
+        fp = tempfile.NamedTemporaryFile()
+        logging.basicConfig(filename=fp.name, format='%(levelname)s:%(message)s', level=logging.WARNING)
 
     
 
@@ -35,6 +38,10 @@ def uri(s, c, r, d):
     except MissingFileSettings:
         logging.debug("Settings' file was not found")
         sys.exit()
+    else:
+        log_file_name = fp.name if fp is not None else log_file
+        print("Some error has occured. Please check the file: %s" % log_file_name)
+
     #options that do not need login 
     if c:
        logging.debug("C option was executed")
@@ -49,7 +56,9 @@ def uri(s, c, r, d):
         login.run()
     except HTTPError:
         logging.debug("HTTP error")
-        sys.exit()
+        log_file_name = fp.name if fp is not None else log_file
+        print("Some error has occured. Please check the file: %s" % log_file_name)
+        return 0
     
 
     if r:
@@ -60,7 +69,10 @@ def uri(s, c, r, d):
        logging.debug("S option was executed")
        sub = rp.SubmissionPage(login.get_session(), s)
        sub.run() 
-
+   
+    if(fp):
+        fp.close()
+    return 1 
 
 if __name__ == "__main__":
     uri()
