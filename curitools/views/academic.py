@@ -29,7 +29,17 @@ class AcademicView(BaseView):
             if name is not None and prof is not None:
                 self.data.append([name, prof])
 
-  
+
+class ListView(BaseView):
+    def __init__(self, page):
+        super(ListView, self).__init__(page)
+
+
+    def extract_table(self):
+        cont = self.content("div", "element")
+        self.table  = cont.find("table")
+        self.extract_html_table()
+
 
   
 

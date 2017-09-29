@@ -17,7 +17,16 @@ class BaseView(object):
         return self.content_html
         
 
-
+    def extract_html_table(self):
+        lines = []
+        for line in self.table.findAll('tr'):
+            line_list = []
+            for l in line.findAll('td'):
+                if l.find('sup'):
+                    l.find('sup').extract()
+                line_list.append(l.getText().replace("\n", "").strip())
+            lines.append(line_list)
+        self.data = lines
     def extract_table(self):
         pass
 
