@@ -26,13 +26,24 @@ def uri(s, c, r, d):
         logging.debug("The value of s: %s, c: %s, r: %s, d: %s", str(s), str(c), str(r), str(d)) 
     else:
         logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.WARNING)
+
+    
+
     settings = Settings() 
     try:
         user, password = settings.get_settings()
     except MissingFileSettings:
         logging.debug("Settings' file was not found")
         sys.exit()
-    
+    #options that do not need login 
+    if c:
+       logging.debug("C option was executed")
+       cwd = os.getcwd()
+       template_dir = os.path.dirname(os.path.realpath(__file__))
+       template_dir = os.path.join(template_dir, "templates")
+       setup = SetupProblem(str(c), cwd, template_dir, "c++")
+       setup.create_files()
+       return 1
     try:
         login = rp.LoginPage(user=user, password=password)
         login.run()
@@ -45,13 +56,6 @@ def uri(s, c, r, d):
        logging.debug("R option was executed")
        sub = rp.TabelaSubmissionPage(session=login.get_session())
        sub.run() 
-    elif c:
-       logging.debug("C option was executed")
-       cwd = os.getcwd()
-       template_dir = os.path.dirname(os.path.realpath(__file__))
-       template_dir = os.path.join(template_dir, "templates")
-       setup = SetupProblem(str(c), cwd, template_dir, "c++")
-       setup.create_files()
     elif s:
        logging.debug("S option was executed")
        sub = rp.SubmissionPage(login.get_session(), s)
