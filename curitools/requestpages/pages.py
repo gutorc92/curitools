@@ -6,11 +6,14 @@ import codecs
 import sys
 import re
 import requests
-from bs4 import BeautifulSoup
-import requests as req
-from curitools.settings import Settings
-from curitools.status import SubmissionStatusOutput
 import logging as l
+import requests as req
+from bs4 import BeautifulSoup
+from status import SubmissionStatusOutput
+from settings import Settings
+
+from views.academic import AcademicView
+
 
 class BasePage(object):
     
@@ -99,31 +102,40 @@ class LoginPage(BasePage):
         self.password = password 
 
     def run(self):
-        #print("Running login")
         page = self.get_page()
-        #print("Getting page")
         form = self.find_forms_fields(page)
-        #print("Getting form")
         form["email"] = self.user
         form["password"] = self.password
-        #print(form)
         response = self.session.post(self.url, data=form)
-        #print(response)
-        
-class TabelaSubmissionPage(BasePage):
-    
-    def __init__(self,session = None):
-        #print(session)
-        super(TabelaSubmissionPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/runs")
+
+class ViewPage(BasePage):
+
+    def __init__(self, session = None, url = None, outclass = None):
+        super(ViewPage, self).__init__(session, url)
+        self.outclass = outclass
 
     def run(self):
         try:
-            response_final = self.session.get(self.url) 
+            response_final = self.session.get(self.url)
         except:
             return 1
         if response_final.status_code == req.codes.ok:
-            status = SubmissionStatusOutput(response_final.content)
+            status = self.outclass(response_final.content)
             status.print_table()
         else:
             return 1
-        
+
+
+class AcademicPage(ViewPage):
+    def __init__(self, session=None):
+        # print(session)
+        super(TabelaSubmissionPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/disciplines",
+                                                   AcademicView)
+
+class TabelaSubmissionPage(ViewPage):
+    
+    def __init__(self,session = None):
+        #print(session)
+        super(TabelaSubmissionPage, self).__init__(session, "https://www.urionlinejudge.com.br/judge/pt/runs", SubmissionStatusOutput)
+
+
