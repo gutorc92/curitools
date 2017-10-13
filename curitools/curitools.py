@@ -5,9 +5,9 @@ import codecs
 import sys
 import re
 import click
-from settings import Settings, MissingFileSettings
-from setup_problems import SetupProblem
-import requestpages.pages as rp
+from curitools.settings import Settings, MissingFileSettings
+from curitools.setup_problems import SetupProblem
+import curitools.requestpages.pages as rp
 from requests.exceptions import HTTPError
 import logging
 import tempfile

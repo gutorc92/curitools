@@ -9,10 +9,10 @@ import requests
 import logging as l
 import requests as req
 from bs4 import BeautifulSoup
-from status import SubmissionStatusOutput
-from settings import Settings
+from curitools.status import SubmissionStatusOutput
+from curitools.settings import Settings
 
-from views.academic import AcademicView
+from curitools.views.academic import AcademicView
 
 
 class BasePage(object):
