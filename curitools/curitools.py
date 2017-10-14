@@ -12,7 +12,7 @@ from requests.exceptions import HTTPError
 import logging
 import tempfile
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.pass_context
 @click.option('-s', default=0, help='Submeter um problema')
 @click.option('-d', is_flag=True, help='Debug output')
@@ -54,7 +54,7 @@ def uri(ctx, s, d):
 
     if s:
        logging.debug("S option was executed")
-       sub = rp.SubmissionPage(login.get_session(), s)
+       sub = rp.SubmissionPage(login.get_session(), s, language=settings.get_language())
        sub.run() 
    
     if(fp):

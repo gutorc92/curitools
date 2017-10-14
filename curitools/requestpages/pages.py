@@ -57,7 +57,14 @@ class SubmissionPage(BasePage):
         self.file_path = file_path if file_path is not None else self.get_file_path()
         self.language = 2 if language is None else language
         l.debug("The parameters of submission page: problem %s, file_path %s, language %s", str(problem), str(self.file_path), str(language))
-    
+   
+    def get_language_uri(self):
+        options = {"c": 1, "c++": 2, "Java 7": 3,  "python 2": 4, "python": 5 }
+        l.debug("The language is %s" % self.language)
+        op = options[self.language]
+        
+        return op
+ 
     def read_file(self):
         text = ""
         with open(self.file_path, "r") as handle:
@@ -78,7 +85,7 @@ class SubmissionPage(BasePage):
         page = self.get_page()
         form = self.find_forms_fields(page)
         form["problem_id"] = self.problem
-        form["language_id"] = self.language
+        form["language_id"] = self.get_language_uri()
         form["source_code"] = text 
         l.debug("The form will be send as %s", str(form))
         response = self.session.post(self.url, data=form)
