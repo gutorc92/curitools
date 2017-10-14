@@ -29,7 +29,6 @@ class SetupProblem(object):
         print(self.workdir)
         if os.path.isdir(self.workdir):
             problem_dir = os.path.join(self.workdir, self.problem)
-            print("Aqui")
             if not os.path.isdir(problem_dir):
                 os.makedirs(problem_dir)
                 self.create_base_files(problem_dir)

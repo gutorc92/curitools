@@ -89,4 +89,9 @@ class Settings(object):
             self.extract_settings()
             return self.get_settings()
 
+    def get_language(self):
+        if hasattr(self, 'language'):
+            return self.language
+        else:
+            return "c++"
 

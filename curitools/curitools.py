@@ -27,7 +27,6 @@ def uri(ctx, s, d):
         fp = tempfile.NamedTemporaryFile()
         logging.basicConfig(filename=fp.name, format='%(levelname)s:%(message)s', level=logging.WARNING)
 
-    
 
     settings = Settings() 
     try:
@@ -39,6 +38,7 @@ def uri(ctx, s, d):
         log_file_name = fp.name if fp is not None else log_file
         print("Some error has occured. Please check the file: %s" % log_file_name)
 
+    ctx.obj = {}
     ctx.obj['settings'] = settings
 
     try:
@@ -77,15 +77,17 @@ def view(ctx, r, a):
        sub.run()
 
 @uri.command()
+@click.option('-n', default=-1, help='Criar diretorio para submter um problema')
 @click.pass_context
-def c(ctx):
+def c(ctx, n):
     """Create files and directories to start solving a problem"""
     logging.debug("C option was executed")
-    cwd = os.getcwd()
-    template_dir = os.path.dirname(os.path.realpath(__file__))
-    template_dir = os.path.join(template_dir, "templates")
-    setup = SetupProblem(str(c), cwd, template_dir, "c++")
-    setup.create_files()
+    if n > 0:
+        cwd = os.getcwd()
+        language = ctx.obj['settings'].get_language()
+        template_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "templates")
+        setup = SetupProblem(str(n), cwd, template_dir, language)
+        setup.create_files()
 
 if __name__ == "__main__":
     uri(obj={})
